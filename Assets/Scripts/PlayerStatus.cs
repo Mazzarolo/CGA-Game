@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerStatus : MonoBehaviour
 {
+    [SerializeField] private GameObject lifeBar;
+    [SerializeField] private GameObject redLifeBar;
+
     private GameObject weapon = null;
 
     public GameObject hand;
@@ -15,6 +19,15 @@ public class PlayerStatus : MonoBehaviour
     private float invincibilityTime = 0.0f;
 
     public int maxInvincibilityTime = 1;
+
+    private Vector3 lifeBarSize;
+
+    void Awake()
+    {
+        lifeBarSize = lifeBar.GetComponent<Transform>().localScale;
+
+        Debug.Log(lifeBarSize);
+    }
     public void ChangeWeapon(GameObject newWeapon)
     {
         if (weapon)
@@ -29,21 +42,39 @@ public class PlayerStatus : MonoBehaviour
     public void TakeDamage(float damage)
     {
 
-        if (invincibilityTime >= maxInvincibilityTime)
+        if (invincibilityTime >= maxInvincibilityTime && health > 0.0f)
         {
             health -= damage;
             invincibilityTime = 0.0f;
+            lifeBar.GetComponent<Transform>().localScale -= new Vector3(lifeBarSize.x * damage / 100, 0, 0);
+            lifeBar.GetComponent<Transform>().localPosition -= new Vector3(lifeBarSize.x * damage / 200, 0, 0);
         }
     }
 
-    void Update()
+    private void DamageBarAnimation ()
     {
-        
+        if (redLifeBar.GetComponent<Transform>().localScale.x >= lifeBar.GetComponent<Transform>().localScale.x)
+        {
+            redLifeBar.GetComponent<Transform>().localScale -= new Vector3(lifeBarSize.x / 1000, 0, 0);
+        }
+    }
+
+    private void Respawn ()
+    {
+        if (redLifeBar.GetComponent<Transform>().localScale.x <= 0)
+            SceneManager.LoadScene("SampleScene");
     }
 
     void FixedUpdate()
     {
+        DamageBarAnimation();
+
         if (invincibilityTime < maxInvincibilityTime)
             invincibilityTime += Time.deltaTime;
+    }
+
+    void Update()
+    {
+        Respawn();
     }
 }
