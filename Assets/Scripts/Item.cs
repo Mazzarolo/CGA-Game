@@ -12,6 +12,8 @@ namespace Aux_Classes
 
         public bool owned;
 
+        public GameObject prefab = null;
+
         public Item(int id, string name, float price)
         {
             itemID = id;

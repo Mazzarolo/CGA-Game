@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2071639255685555146}
   - component: {fileID: 8516468309296683035}
   - component: {fileID: 9213164162536144380}
+  - component: {fileID: 2433503838010517475}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -89,6 +90,21 @@ MonoBehaviour:
     m_Bits: 64
   orientation: {fileID: 7825965038250428860}
   movementState: 0
+--- !u!114 &2433503838010517475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672533865961105117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4c3d505750bf304fae7ad440813956d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hand: {fileID: 1875857166354358717}
+  health: 100
+  money: 0
 --- !u!1 &8213435211056001166
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,6 +215,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4790570789005672832}
   m_SourcePrefab: {fileID: 100100000, guid: 562e0718ab7956847b728afc6f4a2b7b, type: 3}
+--- !u!1 &1875857166354358717 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -6554769426457789733, guid: 562e0718ab7956847b728afc6f4a2b7b, type: 3}
+  m_PrefabInstance: {fileID: 4539810703313754982}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3729486378388776503 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 562e0718ab7956847b728afc6f4a2b7b, type: 3}

@@ -18,11 +18,17 @@ public class ShopManager : MonoBehaviour
 
     public GameObject eventSystem;
 
+    public GameObject player;
+
+    public int selected;
+
     void Start()
     {
         coinsTxt.text = "Money: R$ " + money.ToString();
 
         items[0] = new Item(0, "Baseball Bat", 10.0f);
+
+        selected = -1;
     }
 
     public void Buy()
@@ -37,5 +43,12 @@ public class ShopManager : MonoBehaviour
             coinsTxt.text = "Money: R$ " + money.ToString();
             items[itemID].owned = true;
         }
+
+        if (selected != itemID && items[itemID].owned)
+        {
+            player.GetComponent<PlayerStatus>().ChangeWeapon(items[itemID].prefab);
+        }
+
+        selected = itemID;
     }
 }

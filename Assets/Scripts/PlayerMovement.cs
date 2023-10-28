@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 
-public class PlayerMovementTutorial : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     [Header("Animator")]
     public Animator animator;
@@ -17,6 +17,12 @@ public class PlayerMovementTutorial : MonoBehaviour
     public float jumpCooldown;
     public float airMultiplier;
     bool readyToJump;
+
+    public bool isAttacking;
+
+    bool continueAttacking;
+
+    int nextAttack = 0;
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -54,7 +60,7 @@ public class PlayerMovementTutorial : MonoBehaviour
         readyToJump = true;
     }
 
-    private void shopVerifier()
+    private void ShopVerifier()
     {
         GameObject shopCanvas = GameObject.Find("ShopCanvas");
 
@@ -75,9 +81,11 @@ public class PlayerMovementTutorial : MonoBehaviour
             {
                 shopCanvas.transform.GetChild(0).gameObject.SetActive(false);
                 shopCanvas.transform.GetChild(1).gameObject.SetActive(true);
+                Time.timeScale = 0;
             }
             else if (Input.GetKeyDown(KeyCode.Escape))
             {
+                Time.timeScale = 1;
                 shopCanvas.transform.GetChild(1).gameObject.SetActive(false);
             }
         }
@@ -93,10 +101,11 @@ public class PlayerMovementTutorial : MonoBehaviour
         // ground check
         grounded = Physics.Raycast(transform.position, Vector3.down, 0.2f, ground);
 
-        MyInput();
+        if(Time.timeScale != 0)
+            MyInput();
         SpeedControl();
-        stateControler();
-        shopVerifier();
+        StateControler();
+        ShopVerifier();
 
         // handle drag
         if (grounded)
@@ -107,7 +116,8 @@ public class PlayerMovementTutorial : MonoBehaviour
 
     private void FixedUpdate()
     {
-        MovePlayer();
+        if (!isAttacking)
+            MovePlayer();
     }
 
     private void MyInput()
@@ -116,13 +126,26 @@ public class PlayerMovementTutorial : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         // when to jump
-        if(Input.GetKey(jumpKey) && readyToJump && grounded)
+        if(Input.GetKey(jumpKey) && readyToJump && grounded && !isAttacking)
         {
             readyToJump = false;
 
             Jump();
 
             Invoke(nameof(ResetJump), jumpCooldown);
+        }
+
+        if(Input.GetMouseButton(0) && !isAttacking)
+        {
+            animator.SetBool("isAttacking", true);
+            isAttacking = true;
+        }
+        else if(Input.GetMouseButton(0) && isAttacking)
+        {
+            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && !animator.IsInTransition(0))
+            {
+                continueAttacking = true;
+            }
         }
     }
 
@@ -152,12 +175,45 @@ public class PlayerMovementTutorial : MonoBehaviour
         }
     }
 
-    private void stateControler()
+    private void StateControler()
     {
         if(grounded)
             animator.SetBool("isJumping", false);
 
-        if(grounded && Input.GetKey(sprintKey))
+        if (isAttacking)
+        {
+            if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0) && continueAttacking)
+            {
+                continueAttacking = false;
+                isAttacking = true;
+                animator.SetBool("isAttacking", true);
+
+                if (nextAttack == 0 || nextAttack == 1)
+                {
+                    nextAttack = 2;
+                    animator.SetInteger("nextAttack", 2);
+                }
+                else if (nextAttack == 2)
+                {
+                    nextAttack = 3;
+                    animator.SetInteger("nextAttack", 3);
+                }
+                else if (nextAttack == 3)
+                {
+                    nextAttack = 1;
+                    animator.SetInteger("nextAttack", 1);
+                }
+            }
+            else if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0) && !continueAttacking)
+            {
+                isAttacking = false;
+                continueAttacking = false;
+                nextAttack = 0;
+                animator.SetBool("isAttacking", false);
+                animator.SetInteger("nextAttack", 0);
+            }
+        } 
+        else if(grounded && Input.GetKey(sprintKey))
         {
             movementState = MovementState.Sprinting;
             moveSpeed = sprintSpeed;
@@ -178,7 +234,7 @@ public class PlayerMovementTutorial : MonoBehaviour
             animator.SetBool("isWalking", false);
             animator.SetBool("isSprinting", false);
         }
-        else if (!grounded)
+        else if (!grounded && !readyToJump)
         {
             animator.SetBool("isJumping", true);
             animator.SetBool("isWalking", false);

@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7460515776417622957}
-  m_Layer: 0
+  - component: {fileID: 825777412945781868}
+  m_Layer: 8
   m_Name: BeiseballBat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -32,6 +33,20 @@ Transform:
   - {fileID: 2381078192527274215}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &825777412945781868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6553549730746323345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77646dfdbcf228d40823b106523b12f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startPos: {x: 0, y: -0.037, z: -0.121}
+  startRot: {x: 47.879, y: 0, z: 0}
 --- !u!1001 &2774766565088368396
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -84,6 +99,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BeiseballBatObj
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a97e08b8025648e44bb3e5a711d5e4aa, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -91,6 +110,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a97e08b8025648e44bb3e5a711d5e4aa, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6699278596992514089}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a97e08b8025648e44bb3e5a711d5e4aa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6041909905911069275}
   m_SourcePrefab: {fileID: 100100000, guid: a97e08b8025648e44bb3e5a711d5e4aa, type: 3}
 --- !u!4 &2381078192527274215 stripped
 Transform:
@@ -117,7 +139,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -125,3 +147,19 @@ CapsuleCollider:
   m_Height: 0.6639953
   m_Direction: 2
   m_Center: {x: 0, y: -2.8562747e-15, z: 0.7009926}
+--- !u!114 &6041909905911069275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3044603414625659485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba1c1951dcf67924a895948c59513ca0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  knockback: 10
+  knockbackDuration: 0.5
+  knockbackHeight: 0.5
