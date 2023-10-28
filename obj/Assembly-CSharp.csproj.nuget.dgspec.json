@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jdrma\\Documentos\\Programação\\Unity\\Jogo CGA\\Assembly-CSharp.csproj": {}
+    "C:\\Users\\jdrma\\Documentos\\Programação\\Unity\\CGA-Game\\Assembly-CSharp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jdrma\\Documentos\\Programação\\Unity\\Jogo CGA\\Assembly-CSharp.csproj": {
+    "C:\\Users\\jdrma\\Documentos\\Programação\\Unity\\CGA-Game\\Assembly-CSharp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jdrma\\Documentos\\Programação\\Unity\\Jogo CGA\\Assembly-CSharp.csproj",
+        "projectUniqueName": "C:\\Users\\jdrma\\Documentos\\Programação\\Unity\\CGA-Game\\Assembly-CSharp.csproj",
         "projectName": "Assembly-CSharp",
-        "projectPath": "C:\\Users\\jdrma\\Documentos\\Programação\\Unity\\Jogo CGA\\Assembly-CSharp.csproj",
+        "projectPath": "C:\\Users\\jdrma\\Documentos\\Programação\\Unity\\CGA-Game\\Assembly-CSharp.csproj",
         "packagesPath": "C:\\Users\\jdrma\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jdrma\\Documentos\\Programação\\Unity\\Jogo CGA\\obj\\",
+        "outputPath": "C:\\Users\\jdrma\\Documentos\\Programação\\Unity\\CGA-Game\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jdrma\\AppData\\Roaming\\NuGet\\NuGet.Config",

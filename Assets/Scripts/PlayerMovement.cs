@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class PlayerMovementTutorial : MonoBehaviour
 {
@@ -53,6 +54,40 @@ public class PlayerMovementTutorial : MonoBehaviour
         readyToJump = true;
     }
 
+    private void shopVerifier()
+    {
+        GameObject shopCanvas = GameObject.Find("ShopCanvas");
+
+        if (Vector3.Distance(transform.position, GameObject.Find("Seller").transform.position) < 10)
+        {
+            if (!shopCanvas.transform.GetChild(1).gameObject.activeSelf)
+            {
+                shopCanvas.transform.GetChild(0).gameObject.SetActive(true);
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
+            }
+            else
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                shopCanvas.transform.GetChild(0).gameObject.SetActive(false);
+                shopCanvas.transform.GetChild(1).gameObject.SetActive(true);
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                shopCanvas.transform.GetChild(1).gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            shopCanvas.transform.GetChild(0).gameObject.SetActive(false);
+            shopCanvas.transform.GetChild(1).gameObject.SetActive(false);
+        }
+    }
+
     private void Update()
     {
         // ground check
@@ -61,6 +96,7 @@ public class PlayerMovementTutorial : MonoBehaviour
         MyInput();
         SpeedControl();
         stateControler();
+        shopVerifier();
 
         // handle drag
         if (grounded)

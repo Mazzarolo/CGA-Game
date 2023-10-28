@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "CHEhHJRLGvL4nlIi/i5oYwKT/3Zq+UlAFNPJLCUpxzU3XEard1fQzYsDOdb+Ib5XvkL8ClLF3xPZmqgH1u92Ng==",
+  "dgSpecHash": "9VQJU4Z1oTbGDTbAH4Gn9EiW3NArQbDeXiwcb3KRWkUAYJ14F9gsZwFV/2wtWiujVg6SzSt2cmq00si9eMdqVQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jdrma\\Documentos\\Programação\\Unity\\Jogo CGA\\Assembly-CSharp.csproj",
+  "projectFilePath": "C:\\Users\\jdrma\\Documentos\\Programação\\Unity\\CGA-Game\\Assembly-CSharp.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
