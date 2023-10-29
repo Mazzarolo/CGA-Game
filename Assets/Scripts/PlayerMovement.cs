@@ -134,16 +134,19 @@ public class PlayerMovement : MonoBehaviour
             Invoke(nameof(ResetJump), jumpCooldown);
         }
 
-        if(Input.GetMouseButton(0) && !isAttacking)
+        if(Input.GetMouseButton(0))
         {
             animator.SetBool("isAttacking", true);
             isAttacking = true;
-        }
-        else if(Input.GetMouseButton(0) && isAttacking)
-        {
-            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && !animator.IsInTransition(0))
+
+            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && !animator.IsInTransition(0)
+                && animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
             {
                 continueAttacking = true;
+            }
+            else
+            {
+                continueAttacking = false;
             }
         }
     }
@@ -179,16 +182,8 @@ public class PlayerMovement : MonoBehaviour
         if(grounded)
             animator.SetBool("isJumping", false);
 
-        if (isAttacking)
+        if (isAttacking && animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Sprint"))
-            {
-                continueAttacking = false;
-                isAttacking = false;
-                animator.SetBool("isAttacking", true);
-                animator.SetBool("isSprinting", true);
-                animator.SetBool("isWalking", true);
-            }
             if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0) && continueAttacking)
             {
                 continueAttacking = false;
@@ -210,15 +205,6 @@ public class PlayerMovement : MonoBehaviour
                     nextAttack = 1;
                     animator.SetInteger("nextAttack", 1);
                 }
-            }
-            else if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0) && !continueAttacking 
-                    && (animator.GetCurrentAnimatorStateInfo(0).IsName("Sprint") || animator.GetCurrentAnimatorStateInfo(0).IsName("Run")))
-            {
-                isAttacking = false;
-                continueAttacking = false;
-                nextAttack = 0;
-                animator.SetBool("isAttacking", true);
-                animator.SetInteger("nextAttack", 0);
             }
             else if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0) && !continueAttacking)
             {
