@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
-    bool readyToJump;
+    public bool readyToJump;
     public bool isAttacking;
 
     bool continueAttacking;
