@@ -18,7 +18,7 @@ public class WeaponDamage : MonoBehaviour
             PlayerMovement playerMovement = GetComponentInParent<PlayerMovement>();
             Vector3 dir = other.gameObject.transform.position - transform.position;
             if (playerMovement.isAttacking)
-                other.gameObject.GetComponent<EnemyStatus>().TakeDamage(10.0f, knockback, new Vector3(dir.x, knockbackHeight, dir.z).normalized);
+                other.gameObject.GetComponentInParent<EnemyStatus>().TakeDamage(damage, knockback, new Vector3(dir.x, knockbackHeight, dir.z).normalized);
         }
     }
 

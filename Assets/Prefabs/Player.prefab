@@ -82,6 +82,8 @@ MonoBehaviour:
   jumpForce: 8
   jumpCooldown: 0.25
   airMultiplier: 0.4
+  readyToJump: 0
+  isAttacking: 0
   jumpKey: 32
   sprintKey: 304
   playerHeight: 2
@@ -102,9 +104,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c3d505750bf304fae7ad440813956d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lifeBar: {fileID: 0}
+  redLifeBar: {fileID: 0}
   hand: {fileID: 1875857166354358717}
   health: 100
   money: 0
+  maxInvincibilityTime: 1
 --- !u!1 &8213435211056001166
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ using System;
 public class ShopManager : MonoBehaviour
 {
 
-    public Item[] items = new Item[1];
+    public Item[] items = new Item[2];
 
     public float money;
 
@@ -27,6 +27,8 @@ public class ShopManager : MonoBehaviour
         coinsTxt.text = "Money: $ " + money.ToString();
 
         items[0] = new Item(0, "Baseball Bat", 75.0f);
+
+        items[1] = new Item(1, "Sword", 100.0f);
 
         selected = -1;
     }
