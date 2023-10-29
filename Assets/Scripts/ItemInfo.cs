@@ -28,7 +28,7 @@ public class ItemInfo : MonoBehaviour
         if (shopManager.GetComponent<ShopManager>().items[itemID].owned)
             priceTxt.text = "Owned";
         else
-            priceTxt.text = "R$ " + shopManager.GetComponent<ShopManager>().items[itemID].itemPrice.ToString();
+            priceTxt.text = "$ " + shopManager.GetComponent<ShopManager>().items[itemID].itemPrice.ToString();
         
         nameTxt.text = shopManager.GetComponent<ShopManager>().items[itemID].itemName;
 

@@ -144,9 +144,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.09385827
-  m_Height: 0.88749194
+  m_Height: 0.99106646
   m_Direction: 2
-  m_Center: {x: 0, y: -4.444486e-15, z: 0.8127531}
+  m_Center: {x: 0, y: -5.1805374e-15, z: 0.8645481}
 --- !u!114 &6041909905911069275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,6 +160,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  knockback: 10
-  knockbackDuration: 0.5
-  knockbackHeight: 0.5
+  knockback: 500
+  knockbackHeight: 1

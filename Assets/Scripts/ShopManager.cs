@@ -24,9 +24,9 @@ public class ShopManager : MonoBehaviour
 
     void Start()
     {
-        coinsTxt.text = "Money: R$ " + money.ToString();
+        coinsTxt.text = "Money: $ " + money.ToString();
 
-        items[0] = new Item(0, "Baseball Bat", 10.0f);
+        items[0] = new Item(0, "Baseball Bat", 75.0f);
 
         selected = -1;
     }
@@ -40,7 +40,7 @@ public class ShopManager : MonoBehaviour
         if (money >= items[itemID].itemPrice && !items[itemID].owned)
         {
             money -= items[itemID].itemPrice;
-            coinsTxt.text = "Money: R$ " + money.ToString();
+            coinsTxt.text = "Money: $ " + money.ToString();
             items[itemID].owned = true;
         }
 

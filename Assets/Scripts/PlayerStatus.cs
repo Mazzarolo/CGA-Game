@@ -25,8 +25,6 @@ public class PlayerStatus : MonoBehaviour
     void Awake()
     {
         lifeBarSize = lifeBar.GetComponent<Transform>().localScale;
-
-        Debug.Log(lifeBarSize);
     }
     public void ChangeWeapon(GameObject newWeapon)
     {
@@ -39,15 +37,15 @@ public class PlayerStatus : MonoBehaviour
         weapon.transform.localRotation = Quaternion.Euler(weapon.GetComponent<WeaponProperties>().startRot);
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, float knockback, Vector3 knockbackDir)
     {
-
         if (invincibilityTime >= maxInvincibilityTime && health > 0.0f)
         {
             health -= damage;
             invincibilityTime = 0.0f;
             lifeBar.GetComponent<Transform>().localScale -= new Vector3(lifeBarSize.x * damage / 100, 0, 0);
             lifeBar.GetComponent<Transform>().localPosition -= new Vector3(lifeBarSize.x * damage / 200, 0, 0);
+            GetComponent<Rigidbody>().AddForce(knockbackDir * knockback);
         }
     }
 

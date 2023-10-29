@@ -17,7 +17,6 @@ public class PlayerMovement : MonoBehaviour
     public float jumpCooldown;
     public float airMultiplier;
     bool readyToJump;
-
     public bool isAttacking;
 
     bool continueAttacking;
@@ -64,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
     {
         GameObject shopCanvas = GameObject.Find("ShopCanvas");
 
-        if (Vector3.Distance(transform.position, GameObject.Find("Seller").transform.position) < 10)
+        if (Vector3.Distance(transform.position, GameObject.Find("Shop").transform.position) < 10)
         {
             if (!shopCanvas.transform.GetChild(1).gameObject.activeSelf)
             {
@@ -182,6 +181,14 @@ public class PlayerMovement : MonoBehaviour
 
         if (isAttacking)
         {
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Sprint"))
+            {
+                continueAttacking = false;
+                isAttacking = false;
+                animator.SetBool("isAttacking", true);
+                animator.SetBool("isSprinting", true);
+                animator.SetBool("isWalking", true);
+            }
             if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0) && continueAttacking)
             {
                 continueAttacking = false;
@@ -203,6 +210,15 @@ public class PlayerMovement : MonoBehaviour
                     nextAttack = 1;
                     animator.SetInteger("nextAttack", 1);
                 }
+            }
+            else if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0) && !continueAttacking 
+                    && (animator.GetCurrentAnimatorStateInfo(0).IsName("Sprint") || animator.GetCurrentAnimatorStateInfo(0).IsName("Run")))
+            {
+                isAttacking = false;
+                continueAttacking = false;
+                nextAttack = 0;
+                animator.SetBool("isAttacking", true);
+                animator.SetInteger("nextAttack", 0);
             }
             else if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0) && !continueAttacking)
             {
