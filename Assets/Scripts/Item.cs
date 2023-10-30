@@ -1,25 +1,40 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
-namespace Aux_Classes
+public class Item : MonoBehaviour
 {
-    public class Item
+    public bool owned;
+    public string itemName;
+    public float itemPrice;
+    public TextMeshProUGUI nameTxt;
+    public TextMeshProUGUI priceTxt;
+    public GameObject shopManager;
+
+    public GameObject prefab;
+
+    private void Start()
     {
-        public int itemID;
-        public string itemName;
-        public float itemPrice;
+        owned = false;
 
-        public bool owned;
-
-        public GameObject prefab = null;
-
-        public Item(int id, string name, float price)
+        prefab.layer = 8;
+        
+        foreach (Transform child in prefab.transform)
         {
-            itemID = id;
-            itemName = name;
-            itemPrice = price;
-            owned = false; 
+            child.gameObject.layer = 8;
         }
+
+        nameTxt.text = itemName;
+
+        priceTxt.text = "$ " + itemPrice.ToString();
+    }
+
+    private void Update()
+    {
+        if (owned)
+            priceTxt.text = "Owned";
     }
 }

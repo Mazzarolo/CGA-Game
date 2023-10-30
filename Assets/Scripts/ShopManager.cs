@@ -2,16 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Aux_Classes;
 using UnityEngine.EventSystems;
 using TMPro;
 using System;
 
 public class ShopManager : MonoBehaviour
 {
-
-    public Item[] items = new Item[2];
-
     public float money;
 
     public TextMeshProUGUI coinsTxt;
@@ -20,37 +16,34 @@ public class ShopManager : MonoBehaviour
 
     public GameObject player;
 
-    public int selected;
+    public Item selected;
 
     void Start()
     {
         coinsTxt.text = "Money: $ " + money.ToString();
 
-        items[0] = new Item(0, "Baseball Bat", 75.0f);
-
-        items[1] = new Item(1, "Sword", 100.0f);
-
-        selected = -1;
+        selected = null;
     }
 
     public void Buy()
     {
         GameObject buttonRef = eventSystem.GetComponent<EventSystem>().currentSelectedGameObject;
 
-        int itemID = buttonRef.GetComponent<ItemInfo>().itemID;
+        Item item = buttonRef.GetComponent<Item>();
 
-        if (money >= items[itemID].itemPrice && !items[itemID].owned)
+        if (money >= item.itemPrice && !item.owned)
         {
-            money -= items[itemID].itemPrice;
+            money -= item.itemPrice;
             coinsTxt.text = "Money: $ " + money.ToString();
-            items[itemID].owned = true;
+
+            item.owned = true;
         }
 
-        if (selected != itemID && items[itemID].owned)
+        if (selected != item && item.owned)
         {
-            player.GetComponent<PlayerStatus>().ChangeWeapon(items[itemID].prefab);
+            player.GetComponent<PlayerStatus>().ChangeWeapon(item.prefab);
         }
 
-        selected = itemID;
+        selected = item;
     }
 }

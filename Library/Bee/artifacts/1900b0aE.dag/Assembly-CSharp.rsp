@@ -356,7 +356,6 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.11f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Scripts/EnemyStatus.cs"
 "Assets/Scripts/Item.cs"
-"Assets/Scripts/ItemInfo.cs"
 "Assets/Scripts/PlayerMovement.cs"
 "Assets/Scripts/PlayerStatus.cs"
 "Assets/Scripts/ShopManager.cs"
