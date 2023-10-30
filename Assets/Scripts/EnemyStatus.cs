@@ -33,7 +33,7 @@ public class EnemyStatus : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             Vector3 dir = collision.gameObject.transform.position - transform.position;
-            collision.gameObject.GetComponent<PlayerStatus>().TakeDamage(10.0f, knockback, dir.normalized);
+            collision.gameObject.GetComponent<PlayerStatus>().TakeDamage(10.0f, knockback, new Vector3(dir.x, 0, dir.z).normalized);
         }
     }
 
