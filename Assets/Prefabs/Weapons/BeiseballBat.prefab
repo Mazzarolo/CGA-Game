@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77646dfdbcf228d40823b106523b12f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPos: {x: 0, y: -0.037, z: -0.121}
-  startRot: {x: 47.879, y: 0, z: 0}
+  startPos: {x: 0, y: 0.085, z: -0.145}
+  startRot: {x: 90, y: 0, z: 0}
 --- !u!1001 &2774766565088368396
 PrefabInstance:
   m_ObjectHideFlags: 0
