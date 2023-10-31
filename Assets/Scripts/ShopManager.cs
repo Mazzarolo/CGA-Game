@@ -41,7 +41,7 @@ public class ShopManager : MonoBehaviour
 
         if (selected != item && item.owned)
         {
-            player.GetComponent<PlayerStatus>().ChangeWeapon(item.prefab);
+            player.GetComponent<PlayerStatus>().ChangeWeapon(item.prefab, item.animator);
         }
 
         selected = item;

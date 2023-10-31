@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -26,7 +27,7 @@ public class PlayerStatus : MonoBehaviour
     {
         lifeBarSize = lifeBar.GetComponent<Transform>().localScale;
     }
-    public void ChangeWeapon(GameObject newWeapon)
+    public void ChangeWeapon(GameObject newWeapon, AnimatorController animator)
     {
         if (weapon)
             Destroy(weapon);
@@ -35,6 +36,7 @@ public class PlayerStatus : MonoBehaviour
         weapon.transform.parent = hand.transform;
         weapon.transform.localPosition = weapon.GetComponent<WeaponProperties>().startPos;
         weapon.transform.localRotation = Quaternion.Euler(weapon.GetComponent<WeaponProperties>().startRot);
+        GetComponentInChildren<Animator>().runtimeAnimatorController = animator;
     }
 
     public void TakeDamage(float damage, float knockback, Vector3 knockbackDir)
