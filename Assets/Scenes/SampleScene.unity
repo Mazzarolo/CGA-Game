@@ -376,15 +376,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 79860976}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fba282b8ba44ffb4ca04d0730a9b4db2, type: 3}
+  m_Script: {fileID: 11500000, guid: 0aed0466d88b75840b4ca353732a5afb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   owned: 0
   itemName: Axe
   itemPrice: 300
-  nameTxt: {fileID: 807186291}
-  priceTxt: {fileID: 1006703360}
-  shopManager: {fileID: 1555103899}
   prefab: {fileID: 3384743024299124217, guid: 37154b2417c7b6c45af3ec166e045e3b, type: 3}
   animator: {fileID: 9100000, guid: ff39c7387acfa9a40a9a49b235d901fc, type: 2}
 --- !u!114 &79860979
@@ -1135,15 +1132,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 368348850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fba282b8ba44ffb4ca04d0730a9b4db2, type: 3}
+  m_Script: {fileID: 11500000, guid: 0aed0466d88b75840b4ca353732a5afb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   owned: 0
   itemName: Sword
-  itemPrice: 100
-  nameTxt: {fileID: 478295266}
-  priceTxt: {fileID: 2021154746}
-  shopManager: {fileID: 1555103899}
+  itemPrice: 150
   prefab: {fileID: 5457050724458491408, guid: cc37176ae0cae1241aa4b5c05280e08b, type: 3}
   animator: {fileID: 9100000, guid: 8738e06890e59584db703e14367e36a6, type: 2}
 --- !u!114 &368348853
@@ -1988,7 +1982,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716271779}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.047631975, y: 0.0000000021483564, z: -1.02446746e-10, w: 0.99886495}
+  m_LocalRotation: {x: 0.047631975, y: -0.0000000021483564, z: 1.02446746e-10, w: 0.99886495}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2260,7 +2254,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.04763198, y: 0.0000000021483566, z: -1.02446746e-10, w: 0.99886495}
+  m_LocalRotation: {x: 0.04763198, y: -0.0000000021483566, z: 1.02446746e-10, w: 0.99886495}
   m_LocalPosition: {x: 1.075685, y: 2.509463, z: -4.1929803}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3237,15 +3231,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1475550557}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fba282b8ba44ffb4ca04d0730a9b4db2, type: 3}
+  m_Script: {fileID: 11500000, guid: 0aed0466d88b75840b4ca353732a5afb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   owned: 0
-  itemName: Great Sword
+  itemName: GreatSword
   itemPrice: 800
-  nameTxt: {fileID: 973840484}
-  priceTxt: {fileID: 205523512}
-  shopManager: {fileID: 1555103899}
   prefab: {fileID: 1442257797119605582, guid: 8de2a3642b7de7f42ad6714bd7211c06, type: 3}
   animator: {fileID: 9100000, guid: 19a835843ddf060498a6e6e822378c9f, type: 2}
 --- !u!114 &1475550560
@@ -3429,7 +3420,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageEffectPrefab: {fileID: 7227605988907520002, guid: 9ce72cf611863a8468d7440d6a7fc1b9, type: 3}
-  target: {fileID: 949939432}
+  target: {fileID: 963194228}
   duration: 1
 --- !u!4 &1522904442
 Transform:
@@ -3446,17 +3437,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1555103899 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4780458301304167759, guid: 21ad2bf5e9a8940449667b7c4b82d24f, type: 3}
-  m_PrefabInstance: {fileID: 830189613961135793}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1555103904 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5214859353690209682, guid: 21ad2bf5e9a8940449667b7c4b82d24f, type: 3}
   m_PrefabInstance: {fileID: 830189613961135793}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1555103899}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d8eb4947def89ba42bad783057c30b78, type: 3}
@@ -4127,15 +4113,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1775519689}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fba282b8ba44ffb4ca04d0730a9b4db2, type: 3}
+  m_Script: {fileID: 11500000, guid: 0aed0466d88b75840b4ca353732a5afb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   owned: 0
   itemName: Baseball Bat
   itemPrice: 75
-  nameTxt: {fileID: 127024451}
-  priceTxt: {fileID: 1703747870}
-  shopManager: {fileID: 1555103899}
   prefab: {fileID: 6553549730746323345, guid: 139fda7cb4f4a5a4dbc3540954f3f393, type: 3}
   animator: {fileID: 9100000, guid: 2f9c02b95c9b8744091bba20309aa659, type: 2}
 --- !u!4 &1789335929 stripped
@@ -4153,7 +4136,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1001075436329672145, guid: cf8c1d962547b494b9cf16278ce0716a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 5.7
       objectReference: {fileID: 0}
     - target: {fileID: 1001075436329672145, guid: cf8c1d962547b494b9cf16278ce0716a, type: 3}
       propertyPath: m_LocalPosition.y

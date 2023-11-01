@@ -12,13 +12,16 @@ public class Item : MonoBehaviour
     public bool owned;
     public string itemName;
     public float itemPrice;
-    public TextMeshProUGUI nameTxt;
-    public TextMeshProUGUI priceTxt;
-    public GameObject shopManager;
+    private TextMeshProUGUI nameTxt;
+    private TextMeshProUGUI priceTxt;
     public GameObject prefab;
     public AnimatorController animator;
     private void Start()
     {
+        nameTxt = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+
+        priceTxt = transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+
         owned = false;
 
         prefab.layer = 8;
