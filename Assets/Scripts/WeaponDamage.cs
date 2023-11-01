@@ -18,7 +18,10 @@ public class WeaponDamage : MonoBehaviour
             PlayerMovement playerMovement = GetComponentInParent<PlayerMovement>();
             Vector3 dir = other.gameObject.transform.position - transform.position;
             if (playerMovement.isAttacking && playerMovement.animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+            {
                 other.gameObject.GetComponentInParent<EnemyStatus>().TakeDamage(damage, knockback, new Vector3(dir.x, knockbackHeight, dir.z).normalized);
+                GameObject.Find("DamageEffectController").GetComponent<DamageEffectController>().SpawnDamageEffect(damage, other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position));
+            }
         }
     }
 
