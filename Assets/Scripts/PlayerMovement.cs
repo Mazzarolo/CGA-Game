@@ -78,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.E))
             {
+                GameObject.Find("Shop").GetComponent<ShopManager>().UpdateMoney();
                 shopCanvas.transform.GetChild(0).gameObject.SetActive(false);
                 shopCanvas.transform.GetChild(1).gameObject.SetActive(true);
                 Time.timeScale = 0;

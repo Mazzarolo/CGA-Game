@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,13 +10,15 @@ public class PlayerStatus : MonoBehaviour
     [SerializeField] private GameObject lifeBar;
     [SerializeField] private GameObject redLifeBar;
 
+    [SerializeField] private TextMeshProUGUI moneyText;
+
     private GameObject weapon = null;
 
     public GameObject hand;
 
     public float health = 100.0f;
 
-    public float money = 0.0f;
+    public int money;
 
     private float invincibilityTime = 0.0f;
 
@@ -26,6 +29,8 @@ public class PlayerStatus : MonoBehaviour
     void Awake()
     {
         lifeBarSize = lifeBar.GetComponent<Transform>().localScale;
+
+        moneyText.text = money.ToString();
     }
     public void ChangeWeapon(GameObject newWeapon, AnimatorController animator)
     {
@@ -57,6 +62,12 @@ public class PlayerStatus : MonoBehaviour
         {
             redLifeBar.GetComponent<Transform>().localScale -= new Vector3(lifeBarSize.x / 1000, 0, 0);
         }
+    }
+
+    public void UpdateMoney(int money)
+    {
+        this.money = money;
+        moneyText.text = money.ToString();
     }
 
     private void Respawn ()

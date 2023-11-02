@@ -6,7 +6,6 @@ using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class Item : MonoBehaviour
 {
     public bool owned;

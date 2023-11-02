@@ -8,7 +8,7 @@ using System;
 
 public class ShopManager : MonoBehaviour
 {
-    public float money;
+    private float money;
 
     public TextMeshProUGUI coinsTxt;
 
@@ -20,13 +20,15 @@ public class ShopManager : MonoBehaviour
 
     void Start()
     {
-        coinsTxt.text = "Money: $ " + money.ToString();
+        UpdateMoney();
 
         selected = null;
     }
 
     public void Buy()
     {
+        money = player.GetComponent<PlayerStatus>().money;
+
         GameObject buttonRef = eventSystem.GetComponent<EventSystem>().currentSelectedGameObject;
 
         Item item = buttonRef.GetComponent<Item>();
@@ -37,6 +39,8 @@ public class ShopManager : MonoBehaviour
             coinsTxt.text = "Money: $ " + money.ToString();
 
             item.owned = true;
+
+            player.GetComponent<PlayerStatus>().UpdateMoney((int) money);
         }
 
         if (selected != item && item.owned)
@@ -45,5 +49,12 @@ public class ShopManager : MonoBehaviour
         }
 
         selected = item;
+    }
+
+    public void UpdateMoney()
+    {
+        money = player.GetComponent<PlayerStatus>().money;
+
+        coinsTxt.text = "Money: $ " + money.ToString();
     }
 }
