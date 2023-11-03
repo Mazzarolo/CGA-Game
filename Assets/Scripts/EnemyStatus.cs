@@ -5,13 +5,24 @@ using UnityEngine;
 
 public class EnemyStatus : MonoBehaviour
 {
-    public float health = 100.0f;
+    public float maxHealth;
+
+    private float health;
 
     private float invincibilityTime = 0.0f;
 
     public int maxInvincibilityTime = 1;
 
     public float knockback;
+
+    private GameObject lifeBar;
+
+    void Awake()
+    {
+        health = maxHealth;
+
+        lifeBar = transform.GetChild(1).gameObject;
+    }
 
     public void TakeDamage(float damage, float knockback, Vector3 knockbackDir)
     {
@@ -20,12 +31,18 @@ public class EnemyStatus : MonoBehaviour
             health -= damage;
             invincibilityTime = 0.0f;
             GetComponent<Rigidbody>().AddForce(knockbackDir * knockback);
+            lifeBar.GetComponent<EnemyLifeBarScript>().TakeDamage(damage);
         }
     }
 
     public void Die()
     {
         Destroy(gameObject);
+    }
+
+    public bool isInvincible()
+    {
+        return invincibilityTime < maxInvincibilityTime;
     }
 
     void OnCollisionEnter(Collision collision)

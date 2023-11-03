@@ -19,8 +19,9 @@ public class WeaponDamage : MonoBehaviour
             Vector3 dir = other.gameObject.transform.position - transform.position;
             if (playerMovement.isAttacking && playerMovement.animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
             {
+                if(!other.gameObject.GetComponentInParent<EnemyStatus>().isInvincible())
+                    GameObject.Find("DamageEffectController").GetComponent<DamageEffectController>().SpawnDamageEffect(damage, other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position));
                 other.gameObject.GetComponentInParent<EnemyStatus>().TakeDamage(damage, knockback, new Vector3(dir.x, knockbackHeight, dir.z).normalized);
-                GameObject.Find("DamageEffectController").GetComponent<DamageEffectController>().SpawnDamageEffect(damage, other.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position));
             }
         }
     }

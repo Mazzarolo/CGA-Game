@@ -9,6 +9,7 @@ public class PlayerStatus : MonoBehaviour
 {
     [SerializeField] private GameObject lifeBar;
     [SerializeField] private GameObject redLifeBar;
+    [SerializeField] private TextMeshProUGUI healthText;
 
     [SerializeField] private TextMeshProUGUI moneyText;
 
@@ -29,6 +30,8 @@ public class PlayerStatus : MonoBehaviour
     void Awake()
     {
         lifeBarSize = lifeBar.GetComponent<Transform>().localScale;
+
+        healthText.text = health.ToString() + "/100";
 
         moneyText.text = money.ToString();
     }
@@ -52,6 +55,7 @@ public class PlayerStatus : MonoBehaviour
             invincibilityTime = 0.0f;
             lifeBar.GetComponent<Transform>().localScale -= new Vector3(lifeBarSize.x * damage / 100, 0, 0);
             lifeBar.GetComponent<Transform>().localPosition -= new Vector3(lifeBarSize.x * damage / 200, 0, 0);
+            healthText.text = health.ToString() + "/100";
             GetComponent<Rigidbody>().AddForce(knockbackDir * knockback);
         }
     }
@@ -60,7 +64,7 @@ public class PlayerStatus : MonoBehaviour
     {
         if (redLifeBar.GetComponent<Transform>().localScale.x >= lifeBar.GetComponent<Transform>().localScale.x)
         {
-            redLifeBar.GetComponent<Transform>().localScale -= new Vector3(lifeBarSize.x / 1000, 0, 0);
+            redLifeBar.GetComponent<Transform>().localScale -= new Vector3(0.005f, 0, 0);
         }
     }
 

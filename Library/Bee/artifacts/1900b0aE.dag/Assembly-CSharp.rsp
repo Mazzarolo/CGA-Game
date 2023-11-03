@@ -357,6 +357,7 @@
 "Assets/Scripts/BenhasMovement.cs"
 "Assets/Scripts/DamageEffectController.cs"
 "Assets/Scripts/DamageEffectStatus.cs"
+"Assets/Scripts/EnemyLifeBarScript.cs"
 "Assets/Scripts/EnemyStatus.cs"
 "Assets/Scripts/Item.cs"
 "Assets/Scripts/PlayerMovement.cs"
