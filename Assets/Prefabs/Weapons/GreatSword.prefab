@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba1c1951dcf67924a895948c59513ca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  damage: 50
   knockback: 800
   knockbackHeight: 2
 --- !u!4 &4274781803398378096 stripped

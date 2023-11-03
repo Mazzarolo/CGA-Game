@@ -35,6 +35,24 @@ public class Item : MonoBehaviour
         priceTxt.text = "$ " + itemPrice.ToString();
     }
 
+    public void SetSelectedColor(bool selected)
+    {
+        Button button = GetComponent<Button>();
+        ColorBlock colors = button.colors;
+
+        if (selected)
+        {
+            colors.normalColor = new Color32(26, 255, 0, 255);
+            colors.selectedColor = new Color32(26, 255, 0, 255);
+            button.colors = colors;
+        }
+        else
+        {
+            colors.normalColor = new Color32(3, 0, 41, 255);
+            button.colors = colors;
+        }
+    }
+
     private void Update()
     {
         if (owned)
