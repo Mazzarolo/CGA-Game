@@ -19,12 +19,16 @@ public class PlayerMovement : MonoBehaviour
     public bool readyToJump;
     public bool isAttacking;
 
+    public bool isHealing;
+
     bool continueAttacking;
 
     int nextAttack = 0;
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
+
+    public KeyCode healKey = KeyCode.E;
     public KeyCode sprintKey = KeyCode.LeftShift;
 
     [Header("Ground Check")]
@@ -36,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
 
     float horizontalInput;
     float verticalInput;
-
+    PlayerStatus playerStatus;
     Vector3 moveDirection;
 
     Rigidbody rb;
@@ -57,6 +61,10 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
 
         readyToJump = true;
+
+        isHealing = false;
+
+        playerStatus = GetComponent<PlayerStatus>();
     }
 
     private void ShopVerifier()
@@ -116,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isAttacking)
+        if (!isAttacking && !isHealing)
             MovePlayer();
     }
 
@@ -126,7 +134,7 @@ public class PlayerMovement : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         // when to jump
-        if(Input.GetKey(jumpKey) && readyToJump && grounded && !isAttacking)
+        if(Input.GetKey(jumpKey) && readyToJump && grounded && !isAttacking && !isHealing)
         {
             readyToJump = false;
 
@@ -134,8 +142,17 @@ public class PlayerMovement : MonoBehaviour
 
             Invoke(nameof(ResetJump), jumpCooldown);
         }
+        
+        if(Input.GetKey(healKey) && !isAttacking && !isHealing && readyToJump && grounded)
+        {
+            animator.SetBool("isHealing", true);
 
-        if(Input.GetMouseButton(0))
+            isHealing = true;
+
+            playerStatus.Heal(10);
+        }
+
+        if(Input.GetMouseButton(0) && !isHealing)
         {
             animator.SetBool("isAttacking", true);
             isAttacking = true;
@@ -215,7 +232,15 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetBool("isAttacking", false);
                 animator.SetInteger("nextAttack", 0);
             }
-        } 
+        }
+        else if(isHealing && animator.GetCurrentAnimatorStateInfo(0).IsTag("Heal"))
+        {
+            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0))
+            {
+                isHealing = false;
+                animator.SetBool("isHealing", false);
+            }
+        }
         else if(grounded && Input.GetKey(sprintKey))
         {
             movementState = MovementState.Sprinting;

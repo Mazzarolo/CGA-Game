@@ -126,7 +126,8 @@ public class ShopManager : MonoBehaviour
     void Update()
     {
         PlayerMovement pm = player.GetComponent<PlayerMovement>();
-        if(!pm.isAttacking && !pm.animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && !pm.animator.GetCurrentAnimatorStateInfo(0).IsName("Jump"))
+        if(!pm.isAttacking && !pm.animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack") && !pm.animator.GetCurrentAnimatorStateInfo(0).IsName("Jump")
+            && !pm.isHealing && !pm.animator.GetCurrentAnimatorStateInfo(0).IsTag("Heal"))
             ChangeWeaponByScroll();
     }
 

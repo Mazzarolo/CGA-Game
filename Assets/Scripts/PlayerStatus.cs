@@ -60,6 +60,21 @@ public class PlayerStatus : MonoBehaviour
         }
     }
 
+    public void Heal(float heal)
+    {
+        if (health < 100.0f)
+        {
+            if(health + heal > 100.0f)
+            {
+                heal = 100.0f - health;
+            }
+            health += heal;
+            lifeBar.GetComponent<Transform>().localScale += new Vector3(lifeBarSize.x * heal / 100, 0, 0);
+            lifeBar.GetComponent<Transform>().localPosition += new Vector3(lifeBarSize.x * heal / 200, 0, 0);
+            healthText.text = health.ToString() + "/100";
+        }
+    }
+
     private void DamageBarAnimation ()
     {
         if (redLifeBar.GetComponent<Transform>().localScale.x >= lifeBar.GetComponent<Transform>().localScale.x)
