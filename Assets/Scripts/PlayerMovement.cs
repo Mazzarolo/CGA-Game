@@ -6,6 +6,8 @@ using System;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private GameObject potionModel;
+
     [Header("Animator")]
     public Animator animator;
     [Header("Movement")]
@@ -143,8 +145,10 @@ public class PlayerMovement : MonoBehaviour
             Invoke(nameof(ResetJump), jumpCooldown);
         }
         
-        if(Input.GetKey(healKey) && !isAttacking && !isHealing && readyToJump && grounded)
+        if(Input.GetKey(healKey) && !isAttacking && !isHealing && readyToJump && grounded && playerStatus.numPot > 0)
         {
+            playerStatus.InstantiatePotion(potionModel);
+
             animator.SetBool("isHealing", true);
 
             isHealing = true;
@@ -239,6 +243,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 isHealing = false;
                 animator.SetBool("isHealing", false);
+                playerStatus.DestroyPotion();
             }
         }
         else if(grounded && Input.GetKey(sprintKey))

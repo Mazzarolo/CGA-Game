@@ -65,6 +65,23 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    public void BuyPotion()
+    {
+        money = player.GetComponent<PlayerStatus>().money;
+
+        if (money >= 10)
+        {
+            money -= 10;
+            coinsTxt.text = "Money: $ " + money.ToString();
+
+            player.GetComponent<PlayerStatus>().UpdateMoney((int)money);
+            player.GetComponent<PlayerStatus>().numPot++;
+
+            player.GetComponent<PlayerStatus>().numPotText.color = new Color32(255, 255, 255, 255);
+            player.GetComponent<PlayerStatus>().potionImage.color = new Color32(255, 255, 255, 255);
+        }
+    }
+
     private void ChangeWeaponByScroll()
     {
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)

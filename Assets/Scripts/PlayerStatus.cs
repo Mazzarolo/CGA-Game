@@ -4,18 +4,23 @@ using TMPro;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerStatus : MonoBehaviour
 {
     [SerializeField] private GameObject lifeBar;
     [SerializeField] private GameObject redLifeBar;
     [SerializeField] private TextMeshProUGUI healthText;
+    public RawImage potionImage;
+    public TextMeshProUGUI numPotText;
 
     [SerializeField] private TextMeshProUGUI moneyText;
 
     private GameObject weapon = null;
 
     public GameObject hand;
+
+    public GameObject leftHand;
 
     public float health = 100.0f;
 
@@ -26,6 +31,10 @@ public class PlayerStatus : MonoBehaviour
     public int maxInvincibilityTime = 1;
 
     private Vector3 lifeBarSize;
+
+    private GameObject potion = null;
+
+    public int numPot = 0;
 
     void Awake()
     {
@@ -62,24 +71,53 @@ public class PlayerStatus : MonoBehaviour
 
     public void Heal(float heal)
     {
-        if (health < 100.0f)
+        numPot--;
+
+        if (numPot == 0)
         {
-            if(health + heal > 100.0f)
-            {
-                heal = 100.0f - health;
-            }
-            health += heal;
-            lifeBar.GetComponent<Transform>().localScale += new Vector3(lifeBarSize.x * heal / 100, 0, 0);
-            lifeBar.GetComponent<Transform>().localPosition += new Vector3(lifeBarSize.x * heal / 200, 0, 0);
-            healthText.text = health.ToString() + "/100";
+            numPotText.color = new Color32(255, 255, 255, 0);
+            potionImage.color = new Color32(255, 255, 255, 0);
+        }
+
+        if(health + heal > 100.0f)
+        {
+            heal = 100.0f - health;
+        }
+        health += heal;
+        lifeBar.GetComponent<Transform>().localScale += new Vector3(lifeBarSize.x * heal / 100, 0, 0);
+        lifeBar.GetComponent<Transform>().localPosition += new Vector3(lifeBarSize.x * heal / 200, 0, 0);
+        healthText.text = health.ToString() + "/100";
+    }
+
+    public void InstantiatePotion(GameObject potion)
+    {
+        if (!this.potion)
+        {
+            this.potion = Instantiate(potion, transform.position, transform.rotation);
+            this.potion.transform.parent = leftHand.transform;
+            this.potion.transform.localPosition = new Vector3(0.0f, 0.05f, -0.2f);
+            this.potion.transform.localRotation = Quaternion.Euler(new Vector3(90.0f, 0.0f, -45.0f));
+        }
+    }
+
+    public void DestroyPotion()
+    {
+        if (potion)
+        {
+            Destroy(potion);
+            potion = null;
         }
     }
 
     private void DamageBarAnimation ()
     {
-        if (redLifeBar.GetComponent<Transform>().localScale.x >= lifeBar.GetComponent<Transform>().localScale.x)
+        if (redLifeBar.GetComponent<Transform>().localScale.x > lifeBar.GetComponent<Transform>().localScale.x)
         {
             redLifeBar.GetComponent<Transform>().localScale -= new Vector3(0.005f, 0, 0);
+        }
+        else if (redLifeBar.GetComponent<Transform>().localScale.x < lifeBar.GetComponent<Transform>().localScale.x)
+        {
+            redLifeBar.GetComponent<Transform>().localScale = lifeBar.GetComponent<Transform>().localScale;
         }
     }
 
@@ -105,6 +143,7 @@ public class PlayerStatus : MonoBehaviour
 
     void Update()
     {
+        numPotText.text = numPot.ToString();
         Respawn();
     }
 }
