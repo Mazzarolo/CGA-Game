@@ -17,8 +17,8 @@ TagManager:
   - Walls
   - PlayerWeapon
   - Enemy
-  - 
-  - 
+  - EnemyWeapon
+  - Player
   - 
   - 
   - 
