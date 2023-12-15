@@ -5966,7 +5966,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1868632921}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.09252102, y: -0.000000017659858, z: 0.0000000016409465, w: 0.99571073}
+  m_LocalRotation: {x: 0.09252102, y: 0.000000017659856, z: -0.0000000016409463, w: 0.99571073}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7245,6 +7245,10 @@ PrefabInstance:
       propertyPath: potionImage
       value: 
       objectReference: {fileID: 1826474481}
+    - target: {fileID: 3729486378388776503, guid: e350bf1111227954788e751130a12db2, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 9213164162536144380, guid: e350bf1111227954788e751130a12db2, type: 3}
       propertyPath: potion
       value: 

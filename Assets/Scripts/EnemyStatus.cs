@@ -7,6 +7,7 @@ public class EnemyStatus : MonoBehaviour
 {
     public float maxHealth;
 
+    public float damage = 10.0f;
     private float health;
 
     private float invincibilityTime = 0.0f;
@@ -14,6 +15,8 @@ public class EnemyStatus : MonoBehaviour
     public int maxInvincibilityTime = 1;
 
     public float knockback;
+
+    public float knockbackHeight = 0.0f;
 
     private GameObject lifeBar;
 
@@ -47,11 +50,11 @@ public class EnemyStatus : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player")
+        /*if (collision.gameObject.tag == "Player")
         {
             Vector3 dir = collision.gameObject.transform.position - transform.position;
             collision.gameObject.GetComponent<PlayerStatus>().TakeDamage(10.0f, knockback, new Vector3(dir.x, 0, dir.z).normalized);
-        }
+        }*/
     }
 
     void Update()
