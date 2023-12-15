@@ -36,6 +36,8 @@ public class PlayerStatus : MonoBehaviour
 
     public int numPot = 0;
 
+    private float remainHeal;
+
     void Awake()
     {
         lifeBarSize = lifeBar.GetComponent<Transform>().localScale;
@@ -43,6 +45,8 @@ public class PlayerStatus : MonoBehaviour
         healthText.text = health.ToString() + "/100";
 
         moneyText.text = money.ToString();
+
+        remainHeal = 0.0f;
     }
     public void ChangeWeapon(GameObject newWeapon, AnimatorController animator)
     {
@@ -84,8 +88,9 @@ public class PlayerStatus : MonoBehaviour
             heal = 100.0f - health;
         }
         health += heal;
-        lifeBar.GetComponent<Transform>().localScale += new Vector3(lifeBarSize.x * heal / 100, 0, 0);
-        lifeBar.GetComponent<Transform>().localPosition += new Vector3(lifeBarSize.x * heal / 200, 0, 0);
+        
+        remainHeal = heal;
+
         healthText.text = health.ToString() + "/100";
     }
 
@@ -121,6 +126,19 @@ public class PlayerStatus : MonoBehaviour
         }
     }
 
+    private void HealAnimation ()
+    {
+        if (remainHeal > 0.0f)
+        {
+            float healing = remainHeal / 40.0f;
+
+            lifeBar.GetComponent<Transform>().localScale += new Vector3(lifeBarSize.x * healing / 100, 0, 0);
+            lifeBar.GetComponent<Transform>().localPosition += new Vector3(lifeBarSize.x * healing / 200, 0, 0);
+
+            remainHeal -= healing;
+        }
+    }
+
     public void UpdateMoney(int money)
     {
         this.money = money;
@@ -136,6 +154,7 @@ public class PlayerStatus : MonoBehaviour
     void FixedUpdate()
     {
         DamageBarAnimation();
+        HealAnimation();
 
         if (invincibilityTime < maxInvincibilityTime)
             invincibilityTime += Time.deltaTime;

@@ -9,11 +9,13 @@ public class EnemyMovement : MonoBehaviour
 
     private Rigidbody rb;
 
-    public float seekMaxRange = 10.0f, seekMinRange = 2.0f;
+    public float seekMaxRange = 10.0f, attackRange = 2.0f;
 
-    public float speed = 100.0f, maxSpeed = 5.0f;
+    public float speed, maxSpeed;
 
     private Animator animator;
+
+    private bool isAttacking = false;
 
     private Transform FindHead(Transform parent)
     {
@@ -54,7 +56,7 @@ public class EnemyMovement : MonoBehaviour
 
         Vector3 steer = desired - rb.velocity;
 
-        steer = steer.normalized;
+        steer = Vector3.ClampMagnitude(steer, maxSpeed);
 
         return steer;
     }
@@ -82,27 +84,40 @@ public class EnemyMovement : MonoBehaviour
 
         transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
 
-        FindHead(transform).transform.LookAt(player.transform);
+        FindHead(transform).LookAt(player.transform);
 
-        Vector3 dir = Pursuit(player.transform.position);
-
-        dir = new Vector3(dir.x, 0, dir.z);
-
-        if (distance.magnitude < seekMaxRange && distance.magnitude > seekMinRange && isGrounded())
+        if (distance.magnitude < seekMaxRange && distance.magnitude > attackRange && isGrounded() && !isAttacking)
         {
-            if (rb.velocity.magnitude < maxSpeed)
-                rb.AddForce(dir * speed);
+            Vector3 dir = Pursuit(player.transform.position);
+
+            dir = new Vector3(dir.x, 0, dir.z);
+
+            rb.AddForce(dir);
         }
 
-        if (distance.magnitude < seekMinRange && isGrounded())
+        if (distance.magnitude < attackRange && isGrounded())
         {
-            rb.velocity = -dir;
+            rb.velocity = Vector3.zero;
+            isAttacking = true;
+            animator.SetBool("isAttacking", true);
         }
     }
 
     void StateControler()
     {
-        if (rb.velocity.magnitude > 0.1f)
+        //Debug.Log("animation attack: " + animator.GetBool("isAttacking"));
+        //Debug.Log("isAttacking: " + isAttacking);
+
+        if (isAttacking && animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+        {
+            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0))
+            {
+                isAttacking = false;
+                animator.SetBool("isAttacking", false);
+            }
+        }
+        
+        if (rb.velocity.magnitude > 0.2f )
         {
             animator.SetBool("isWalking", true);
         }
@@ -115,6 +130,5 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         StateControler();
-        Debug.Log(rb.velocity.magnitude);
     }
 }
