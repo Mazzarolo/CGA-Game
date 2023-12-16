@@ -359,6 +359,8 @@
 "Assets/Scripts/DamageEffectStatus.cs"
 "Assets/Scripts/EnemyLifeBarScript.cs"
 "Assets/Scripts/EnemyMovement.cs"
+"Assets/Scripts/EnemySpawner.cs"
+"Assets/Scripts/EnemySpawnerCapsule.cs"
 "Assets/Scripts/EnemyStatus.cs"
 "Assets/Scripts/EnemyWeapon.cs"
 "Assets/Scripts/Item.cs"

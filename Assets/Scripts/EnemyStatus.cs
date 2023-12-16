@@ -6,18 +6,12 @@ using UnityEngine;
 public class EnemyStatus : MonoBehaviour
 {
     public float maxHealth;
-
     public float damage = 10.0f;
     private float health;
-
     private float invincibilityTime = 0.0f;
-
     public int maxInvincibilityTime = 1;
-
     public float knockback;
-
     public float knockbackHeight = 0.0f;
-
     private GameObject lifeBar;
 
     void Awake()
