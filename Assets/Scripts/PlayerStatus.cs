@@ -65,6 +65,11 @@ public class PlayerStatus : MonoBehaviour
         if (invincibilityTime >= maxInvincibilityTime && health > 0.0f)
         {
             health -= damage;
+            if(health < 0.0f)
+            {
+                damage = damage + health;
+                health = 0.0f;
+            }
             invincibilityTime = 0.0f;
             lifeBar.GetComponent<Transform>().localScale -= new Vector3(lifeBarSize.x * damage / 100, 0, 0);
             lifeBar.GetComponent<Transform>().localPosition -= new Vector3(lifeBarSize.x * damage / 200, 0, 0);
@@ -130,7 +135,7 @@ public class PlayerStatus : MonoBehaviour
     {
         if (remainHeal > 0.0f)
         {
-            float healing = remainHeal / 40.0f;
+            float healing = remainHeal / 10.0f;
 
             lifeBar.GetComponent<Transform>().localScale += new Vector3(lifeBarSize.x * healing / 100, 0, 0);
             lifeBar.GetComponent<Transform>().localPosition += new Vector3(lifeBarSize.x * healing / 200, 0, 0);
@@ -145,10 +150,9 @@ public class PlayerStatus : MonoBehaviour
         moneyText.text = money.ToString();
     }
 
-    private void Respawn ()
+    public void Respawn ()
     {
-        if (redLifeBar.GetComponent<Transform>().localScale.x <= 0)
-            SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("SampleScene");
     }
 
     void FixedUpdate()
@@ -163,6 +167,5 @@ public class PlayerStatus : MonoBehaviour
     void Update()
     {
         numPotText.text = numPot.ToString();
-        Respawn();
     }
 }

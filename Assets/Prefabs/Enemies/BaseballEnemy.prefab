@@ -75,11 +75,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55cb7b434b7b6ff4f8f15368e3be82be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 60
-  damage: 20
+  maxHealth: 30
+  damage: 5
+  health: 0
   maxInvincibilityTime: 1
   knockback: 500
   knockbackHeight: 1
+  value: 10
+  playerStatus: {fileID: 0}
 --- !u!114 &1455471711306305101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,12 +95,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac55914bfc690e64199a6d7b0e59404d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seekMaxRange: 10
+  seekMaxRange: 25
   attackRange: 2
   speed: 20
   maxSpeed: 25
   animator: {fileID: 0}
   isAttacking: 0
+  isSpawning: 0
 --- !u!1001 &2479887498987554531
 PrefabInstance:
   m_ObjectHideFlags: 0

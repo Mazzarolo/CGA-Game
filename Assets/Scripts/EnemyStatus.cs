@@ -7,18 +7,24 @@ public class EnemyStatus : MonoBehaviour
 {
     public float maxHealth;
     public float damage = 10.0f;
-    private float health;
+    public float health;
     private float invincibilityTime = 0.0f;
     public int maxInvincibilityTime = 1;
     public float knockback;
     public float knockbackHeight = 0.0f;
     private GameObject lifeBar;
 
+    public float value = 10.0f;
+
+    public PlayerStatus playerStatus;
+
     void Awake()
     {
         health = maxHealth;
 
         lifeBar = transform.GetChild(1).gameObject;
+
+        playerStatus = GameObject.Find("Player").GetComponent<PlayerStatus>();
     }
 
     public void TakeDamage(float damage, float knockback, Vector3 knockbackDir)
@@ -26,6 +32,11 @@ public class EnemyStatus : MonoBehaviour
         if (invincibilityTime >= maxInvincibilityTime)
         {
             health -= damage;
+            if(health < 0.0f)
+            {
+                damage = damage + health;
+                health = 0.0f;
+            }
             invincibilityTime = 0.0f;
             GetComponent<Rigidbody>().AddForce(knockbackDir * knockback);
             lifeBar.GetComponent<EnemyLifeBarScript>().TakeDamage(damage);
@@ -34,6 +45,7 @@ public class EnemyStatus : MonoBehaviour
 
     public void Die()
     {
+        playerStatus.UpdateMoney((int) value + playerStatus.money);
         Destroy(gameObject);
     }
 
@@ -53,7 +65,7 @@ public class EnemyStatus : MonoBehaviour
 
     void Update()
     {
-        if (health <= 0.0f)
+        if (health <= 0.0f && GetComponent<EnemyMovement>() == null)
             Die();
     }
 

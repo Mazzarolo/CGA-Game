@@ -17,6 +17,9 @@ public class EnemyMovement : MonoBehaviour
 
     public bool isAttacking = false;
 
+    public bool isSpawning = false;
+    private bool isDead = false;
+
     private Transform FindHead(Transform parent)
     {
         foreach (Transform child in parent)
@@ -80,6 +83,12 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(!isDead && !isSpawning)
+            Move();
+    }
+
+    void Move()
+    {
         Vector3 distance = player.transform.position - transform.position;
 
         transform.LookAt(new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z));
@@ -106,8 +115,15 @@ public class EnemyMovement : MonoBehaviour
 
     void StateControler()
     {
-        //Debug.Log("animation attack: " + animator.GetBool("isAttacking"));
-        //Debug.Log("isAttacking: " + isAttacking);
+        if (GetComponent<EnemyStatus>().health <= 0 && !animator.GetBool("isDead"))
+        {
+            isDead = true;
+            animator.SetBool("isDead", true);
+            return;
+        }
+
+        if (animator.GetBool("isDead") && animator.GetCurrentAnimatorStateInfo(0).IsTag("Dead") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0))
+            GetComponent<EnemyStatus>().Die();
 
         if (isAttacking && animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {

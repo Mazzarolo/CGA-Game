@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEditor.Experimental.GraphView;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool isHealing;
 
+    public bool isDead;
     bool continueAttacking;
 
     int nextAttack = 0;
@@ -67,6 +69,17 @@ public class PlayerMovement : MonoBehaviour
         isHealing = false;
 
         playerStatus = GetComponent<PlayerStatus>();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == 9)
+        {
+            Vector3 knockbackDir = transform.position - collision.gameObject.transform.position;
+            knockbackDir = new Vector3(knockbackDir.x, 0, knockbackDir.z).normalized;
+            Rigidbody rb = GetComponent<Rigidbody>();
+            rb.AddForce(knockbackDir * 20, ForceMode.Impulse);
+        }
     }
 
     private void ShopVerifier()
@@ -136,7 +149,7 @@ public class PlayerMovement : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         // when to jump
-        if(Input.GetKey(jumpKey) && readyToJump && grounded && !isAttacking && !isHealing)
+        if(Input.GetKey(jumpKey) && readyToJump && grounded && !isAttacking && !isHealing && !isDead)
         {
             readyToJump = false;
 
@@ -145,7 +158,7 @@ public class PlayerMovement : MonoBehaviour
             Invoke(nameof(ResetJump), jumpCooldown);
         }
         
-        if(Input.GetKey(healKey) && !isAttacking && !isHealing && readyToJump && grounded && playerStatus.numPot > 0)
+        if(Input.GetKey(healKey) && !isAttacking && !isHealing && readyToJump && grounded && playerStatus.numPot > 0 && !isDead)
         {
             playerStatus.InstantiatePotion(potionModel);
 
@@ -153,10 +166,10 @@ public class PlayerMovement : MonoBehaviour
 
             isHealing = true;
 
-            playerStatus.Heal(10);
+            playerStatus.Heal(20);
         }
 
-        if(Input.GetMouseButton(0) && !isHealing)
+        if(Input.GetMouseButton(0) && !isHealing && !isDead)
         {
             animator.SetBool("isAttacking", true);
             isAttacking = true;
@@ -201,6 +214,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void StateControler()
     {
+        if(playerStatus.health <= 0 && !animator.GetBool("isDead"))
+        {
+            isDead = true;
+            animator.SetBool("isDead", true);
+            return;
+        }
+
+        if(animator.GetBool("isDead") && animator.GetCurrentAnimatorStateInfo(0).IsTag("Dead") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 1 && !animator.IsInTransition(0))
+            playerStatus.Respawn();
+
         if(grounded)
             animator.SetBool("isJumping", false);
 

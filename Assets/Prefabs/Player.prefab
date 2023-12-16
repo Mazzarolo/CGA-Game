@@ -86,6 +86,7 @@ MonoBehaviour:
   readyToJump: 0
   isAttacking: 0
   isHealing: 0
+  isDead: 0
   jumpKey: 32
   healKey: 101
   sprintKey: 304

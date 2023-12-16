@@ -24,6 +24,8 @@ public class EnemySpawnerCapsule : MonoBehaviour
         }
         else if (spawned == true && transform.position.y <= destroyheight)
         {
+            if (enemyPrefab.GetComponent<EnemyMovement>() != null)
+                enemyPrefab.GetComponent<EnemyMovement>().isSpawning = false;
             Destroy(gameObject);
         }
     }
@@ -32,7 +34,11 @@ public class EnemySpawnerCapsule : MonoBehaviour
     {
         if (spawned == false && transform.position.y >= spawnHeight)
         {
-            Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+            enemyPrefab = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+            if (enemyPrefab.GetComponent<EnemyMovement>() != null)
+            {
+                enemyPrefab.GetComponent<EnemyMovement>().isSpawning = true;
+            }
             spawned = true;
         }
     }

@@ -9,7 +9,9 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] private GameObject spawnCapsulePrefab;
 
-    [SerializeField] private float startSpawnTime = 5.0f;
+    [SerializeField] private float spawnInterval = 5.0f;
+
+    private float spawnTimer = 5.0f;
 
     [SerializeField] private float spawnRadius = 22.0f;
 
@@ -30,14 +32,20 @@ public class EnemySpawner : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (startSpawnTime > 0.0f)
+        if (spawnTimer < spawnInterval)
         {
-            startSpawnTime -= Time.deltaTime;
+            spawnTimer += Time.deltaTime;
         }
         else
         {
             SpawnEnemy();
-            startSpawnTime = 5.0f;
+            spawnTimer = 0.0f;
+            spawnInterval -= 0.2f;
+
+            if (spawnInterval < 1.0f)
+            {
+                spawnInterval = 1.0f;
+            }
         }
     }
 }
