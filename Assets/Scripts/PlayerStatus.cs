@@ -174,7 +174,6 @@ public class PlayerStatus : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(earnedMoney);
         numPotText.text = numPot.ToString();
     }
 }

@@ -12,6 +12,10 @@ public class EnemySpawnerCapsule : MonoBehaviour
 
     private float speed = 0.05f;
 
+    private float addLife = 0.0f;
+
+    private float addValue = 0.0f;
+
     void MoveCapsule()
     {
         if (spawned == false && transform.position.y < spawnHeight)
@@ -40,6 +44,9 @@ public class EnemySpawnerCapsule : MonoBehaviour
             {
                 enemyPrefab.GetComponent<EnemyMovement>().isSpawning = true;
             }
+            enemyPrefab.GetComponent<EnemyStatus>().maxHealth += addLife;
+            enemyPrefab.GetComponent<EnemyStatus>().health += addLife;
+            enemyPrefab.GetComponent<EnemyStatus>().value += addValue;
             spawned = true;
         }
     }
@@ -48,5 +55,11 @@ public class EnemySpawnerCapsule : MonoBehaviour
     {
         MoveCapsule();
         SpawnEnemy();
+
+        float playerMoney = PlayerStatus.earnedMoney;
+
+        addLife = (float) System.Math.Floor(playerMoney / 100.0f) * 5.0f;
+
+        addValue = (float) System.Math.Floor(playerMoney / 100.0f) * 15.0f;
     }
 }

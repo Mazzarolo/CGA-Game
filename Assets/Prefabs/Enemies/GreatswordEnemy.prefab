@@ -75,7 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55cb7b434b7b6ff4f8f15368e3be82be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 30
+  maxHealth: 15
   damage: 50
   health: 0
   maxInvincibilityTime: 1
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   seekMaxRange: 12
-  attackRange: 4
+  attackRange: 3
   speed: 20
   maxSpeed: 25
   animator: {fileID: 0}

@@ -94,9 +94,6 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 64
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 512
   orientation: {fileID: 7825965038250428860}
   movementState: 0
 --- !u!114 &2433503838010517475
@@ -117,6 +114,7 @@ MonoBehaviour:
   potionImage: {fileID: 0}
   numPotText: {fileID: 0}
   moneyText: {fileID: 0}
+  weapon: {fileID: 6553549730746323345, guid: 7f0dc3b123e7ab24ea3025fed9636189, type: 3}
   hand: {fileID: 1875857166354358717}
   leftHand: {fileID: 0}
   health: 100
