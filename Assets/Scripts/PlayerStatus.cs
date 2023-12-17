@@ -25,6 +25,8 @@ public class PlayerStatus : MonoBehaviour
     public float health = 100.0f;
 
     public int money;
+    
+    public static int earnedMoney;
 
     private float invincibilityTime = 0.0f;
 
@@ -47,6 +49,8 @@ public class PlayerStatus : MonoBehaviour
         moneyText.text = money.ToString();
 
         remainHeal = 0.0f;
+
+        earnedMoney = 0;
     }
     public void ChangeWeapon(GameObject newWeapon, AnimatorController animator)
     {
@@ -146,13 +150,17 @@ public class PlayerStatus : MonoBehaviour
 
     public void UpdateMoney(int money)
     {
+        if (money > this.money)
+            earnedMoney += (money - this.money);
         this.money = money;
         moneyText.text = money.ToString();
     }
 
     public void Respawn ()
     {
-        SceneManager.LoadScene("SampleScene");
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     void FixedUpdate()
@@ -166,6 +174,7 @@ public class PlayerStatus : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(earnedMoney);
         numPotText.text = numPot.ToString();
     }
 }

@@ -24,8 +24,9 @@ public class EnemySpawnerCapsule : MonoBehaviour
         }
         else if (spawned == true && transform.position.y <= destroyheight)
         {
-            if (enemyPrefab.GetComponent<EnemyMovement>() != null)
-                enemyPrefab.GetComponent<EnemyMovement>().isSpawning = false;
+            if (enemyPrefab != null)
+                if (enemyPrefab.GetComponent<EnemyMovement>() != null)
+                    enemyPrefab.GetComponent<EnemyMovement>().isSpawning = false;
             Destroy(gameObject);
         }
     }
