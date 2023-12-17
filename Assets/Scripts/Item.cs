@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +10,7 @@ public class Item : MonoBehaviour
     private TextMeshProUGUI nameTxt;
     private TextMeshProUGUI priceTxt;
     public GameObject prefab;
-    public AnimatorController animator;
+    public RuntimeAnimatorController animator;
     private void Start()
     {
         nameTxt = transform.GetChild(1).GetComponent<TextMeshProUGUI>();

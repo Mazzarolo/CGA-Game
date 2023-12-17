@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -52,7 +49,7 @@ public class PlayerStatus : MonoBehaviour
 
         earnedMoney = 0;
     }
-    public void ChangeWeapon(GameObject newWeapon, AnimatorController animator)
+    public void ChangeWeapon(GameObject newWeapon, RuntimeAnimatorController animator)
     {
         if (weapon)
             Destroy(weapon);
